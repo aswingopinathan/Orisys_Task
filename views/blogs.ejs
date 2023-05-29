@@ -22,13 +22,14 @@
           <p><strong>Updated At:</strong> <%= blog.updatedAt %></p>
           <% if (blog.authorContact === email) { %>
             <p><a href="/posts/updatepost/<%= blog.id %>">Update blog</a></p>
+            <a href="#" onclick="deleteBlog('<%= blog.id %>')" style="text-decoration: none;"><span style="color: red;">Delete blog</span></a>
           <% } %>
-          <a href="#" onclick="deleteBlog('<%= blog.id %>')" style="text-decoration: none;"><span style="color: red;">Delete blog</span></a>
         </li>
       <% }); %>
     </ul>
   <% } %>
-  <a href="/posts/createblog">New Blog</a>
+  <p><a style="margin-left: 50px;" href="/posts/createblog">Write New Blog</a></p>
+  <a style="margin-left: 50px;" href="/users/logout">LOGOUT</a>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     function deleteBlog(blogId) {

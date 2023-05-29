@@ -15,7 +15,6 @@ module.exports={
     },
 
     writePost:async(req,res)=>{
-        // res.send("new post")
         const { title, content } = req.body;
         const image = req.file.filename;
         console.log('req.session.user',req.session.user);
@@ -42,7 +41,8 @@ module.exports={
     updatePost:async(req,res)=>{
 
   try {
-    const { title,content,authorContact,blogId,image }=req.body
+    const { title,content,authorContact,blogId }=req.body
+    const image = req.file.filename;
     let id=parseInt(blogId)
     const updatedBlog = await prisma.post.update({
       where: {

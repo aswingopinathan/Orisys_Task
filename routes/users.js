@@ -1,5 +1,5 @@
 var express = require('express');
-const { register, login } = require('../controllers/userController');
+const { register, login, logout } = require('../controllers/userController');
 var router = express.Router();
 const userCheck=(req,res,next)=>{
   if(!req.session.user){
@@ -20,6 +20,9 @@ router.get('/login',userCheck, function(req, res, next) {
 });
 
 router.post('/login',userCheck,login);
+
+router.get('/logout',logout);
+
 
 
 module.exports = router;

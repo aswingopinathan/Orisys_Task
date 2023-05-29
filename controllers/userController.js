@@ -26,7 +26,6 @@ module.exports={
                 email:user.email,
                 userId:user.id
               };
-                // res.send('user registered').json(user)
                 res.redirect('/posts')
             }else{
                 res.sendStatus(500)
@@ -53,7 +52,6 @@ module.exports={
         
           const isPasswordValid = await bcrypt.compare(password, user.password);
            if(isPasswordValid){
-            // res.send('user verified')
             req.session.user = {
               firstName: user.firstName,
               lastName: user.lastName,
@@ -64,6 +62,11 @@ module.exports={
            }else{
             res.send("invalid password")
            }
+    },
+
+    logout:(req,res)=>{
+      req.session.user=false;
+      res.redirect('/users/login')
     }
 
 }
