@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Blog</title>
+</head>
+<body>
+  <h1>Blog</h1>
+  <% if (blogs.length === 0) { %>
+    <p>No blogs available.</p>
+    <a href="/posts/createblog">Create blog</a>
+  <% } else { %>
+    <ul>
+      <% blogs.forEach(blog => { %>
+        <li>
+          <h2><%= blog.title %></h2>
+          <p><%= blog.content %></p>
+          <img src=<%= blog.image %>>
+          <p><strong>Blog code: </strong><%= blog.id %></p>
+          <p><strong>Author Contact:</strong> <%= blog.authorContact %></p>
+          <p><strong>Created At:</strong> <%= blog.createdAt %></p>
+          <a href="/posts/updatepost?id=<%= blog.id %>>">update blog</a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+  <a href="/posts/createblog">New Blog</a>
+</body>
+</html>
