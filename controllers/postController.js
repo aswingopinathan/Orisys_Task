@@ -5,7 +5,9 @@ module.exports={
     getPost:async(req,res)=>{
         try {
             const blogs = await prisma.post.findMany();
-            res.render('blogs', { blogs });
+            const email=req.session.user.email
+            console.log("email",email);
+            res.render('blogs', { blogs,email });
           } catch (error) {
             console.error('Error retrieving blogs:', error);
             res.status(500).send('Internal Server Error');
@@ -38,15 +40,13 @@ module.exports={
     },
 
     updatePost:async(req,res)=>{
-        // res.send("post updated")
-        const blogId = req.params.id
-        const image = req.file ? req.file.filename : null;
 
   try {
-    const { title,content,authorContact }=req.body
+    const { title,content,authorContact,blogId,image }=req.body
+    let id=parseInt(blogId)
     const updatedBlog = await prisma.post.update({
       where: {
-        id: blogId,
+        id,
       },
       data: {
         title,

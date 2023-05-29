@@ -15,14 +15,17 @@
         <li>
           <h2><%= blog.title %></h2>
           <p><%= blog.content %></p>
-          <img src=/images/<%= blog.image %>>
+          <img src="/images/<%= blog.image %>">
           <p><strong>Blog code: </strong><%= blog.id %></p>
           <p><strong>Author Contact:</strong> <%= blog.authorContact %></p>
           <p><strong>Created At:</strong> <%= blog.createdAt %></p>
-          <a href="/posts/updatepost?id=<%= blog.id %>>">update blog</a><br>
-          <a href="#" onclick="deleteBlog('<%= blog.id %>')" style=" text-decoration: none;"><span style="color: red;">delete blog</span></a>
+          <p><strong>Updated At:</strong> <%= blog.updatedAt %></p>
+          <% if (blog.authorContact === email) { %>
+            <p><a href="/posts/updatepost/<%= blog.id %>">Update blog</a></p>
+          <% } %>
+          <a href="#" onclick="deleteBlog('<%= blog.id %>')" style="text-decoration: none;"><span style="color: red;">Delete blog</span></a>
         </li>
-      <% }) %>
+      <% }); %>
     </ul>
   <% } %>
   <a href="/posts/createblog">New Blog</a>
