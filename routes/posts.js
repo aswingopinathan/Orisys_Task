@@ -17,6 +17,6 @@ router.get('/updatepost', function(req, res, next) {
 
 router.post('/updatepost/:id',upload.single("pic"),updatePost);
 
-router.delete('/deletepost',deletePost);
+router.post('/deletepost/:id',deletePost);
 
 module.exports = router;

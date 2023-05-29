@@ -65,6 +65,20 @@ module.exports={
     },
 
     deletePost:async(req,res)=>{
-        res.send("post deleted")
+        console.log("req.params.id",req.params.id);
+        const blogId = parseInt(req.params.id);
+        try {
+            await prisma.post.delete({
+              where: {
+                id: blogId,
+              },
+            });
+        
+            console.log('Blog post deleted');
+            res.redirect('/posts'); 
+          } catch (error) {
+            console.error('Error deleting blog post:', error);
+            res.status(500).send('Internal Server Error');
+          }
     }
 }

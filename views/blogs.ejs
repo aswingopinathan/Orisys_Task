@@ -15,15 +15,36 @@
         <li>
           <h2><%= blog.title %></h2>
           <p><%= blog.content %></p>
-          <img src=<%= blog.image %>>
+          <img src=/images/<%= blog.image %>>
           <p><strong>Blog code: </strong><%= blog.id %></p>
           <p><strong>Author Contact:</strong> <%= blog.authorContact %></p>
           <p><strong>Created At:</strong> <%= blog.createdAt %></p>
-          <a href="/posts/updatepost?id=<%= blog.id %>>">update blog</a>
+          <a href="/posts/updatepost?id=<%= blog.id %>>">update blog</a><br>
+          <a href="#" onclick="deleteBlog('<%= blog.id %>')" style=" text-decoration: none;"><span style="color: red;">delete blog</span></a>
         </li>
       <% }) %>
     </ul>
   <% } %>
   <a href="/posts/createblog">New Blog</a>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function deleteBlog(blogId) {
+      console.log(blogId);
+      if (confirm('Are you sure you want to delete this blog?')) {
+        $.ajax({
+          url: '/posts/deletepost/' + blogId,
+          method: 'POST',
+          success: function (response) {
+            console.log(response);
+            location.reload();
+          },
+          error: function (error) {
+            console.error('Error deleting blog:', error);
+            alert('Failed to delete the blog. Please try again.');
+          }
+        });
+      }
+    }
+  </script>
 </body>
 </html>
